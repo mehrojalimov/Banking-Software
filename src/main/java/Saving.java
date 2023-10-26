@@ -1,6 +1,6 @@
-public class Saving extends Accounts{
+public class Saving extends Account {
 
-    public Saving(double apr){
-        super(apr);
-    }
+	public Saving(int uniqueId, double apr) {
+		super(uniqueId, apr);
+	}
 }
