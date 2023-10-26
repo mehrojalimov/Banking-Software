@@ -44,9 +44,9 @@ public class BankTest {
 	void retrieving_one_account_from_bank_retrieves_the_correct_account() {
 		createAccounts();
 
-		double actual = bank.retrieveAccount(UNIQUE_ID).getAPR();
+		double actual = bank.retrieveAccount(UNIQUE_ID).getUNIQUE_ID();
 
-		assertEquals(APR, actual);
+		assertEquals(UNIQUE_ID, actual);
 
 	}
 
@@ -55,27 +55,45 @@ public class BankTest {
 		createAccounts();
 
 		bank.deposit(UNIQUE_ID, 1000.75);
-		bank.deposit(UNIQUE_ID, 500);
 
 		double actual = bank.retrieveAccount(UNIQUE_ID).getBalance();
 
-		assertEquals(1500.75, actual);
+		assertEquals(1000.75, actual);
 	}
 
 	@Test
 	void withdraw_money_by_ID_through_bank() {
 		createAccounts();
 
-		bank.withdraw(11111111, 5000);
+		bank.withdraw(11111111, 4000);
 
 		double actual = bank.retrieveAccount(11111111).getBalance();
 
-		assertEquals(5000, actual);
+		assertEquals(6000, actual);
 	}
 
 	@Test
 	void depositing_twice_through_bank() {
 		createAccounts();
+
+		bank.deposit(UNIQUE_ID, 1000);
+		bank.deposit(UNIQUE_ID, 2000);
+
+		double actual = bank.retrieveAccount(UNIQUE_ID).getBalance();
+
+		assertEquals(3000, actual);
+	}
+
+	@Test
+	void withdrawing_twice_through_bank() {
+		createAccounts();
+
+		bank.withdraw(11111111, 2000);
+		bank.withdraw(11111111, 3000);
+
+		double actual = bank.retrieveAccount(11111111).getBalance();
+
+		assertEquals(5000, actual);
 	}
 
 }

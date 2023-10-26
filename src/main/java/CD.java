@@ -1,7 +1,7 @@
-public class CD extends Accounts{
+public class CD extends Account {
 
-    public CD(double apr, double balance){
-        super(apr,balance);
-    }
+	public CD(int uniqueId, double apr, double balance) {
+		super(uniqueId, apr, balance);
+	}
 
 }
