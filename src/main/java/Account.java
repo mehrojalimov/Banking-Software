@@ -21,6 +21,7 @@ public abstract class Account {
 
 	public double getAPR() {
 		return APR;
+
 	}
 
 	public int getUNIQUE_ID() {
