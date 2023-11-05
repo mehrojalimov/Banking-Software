@@ -37,4 +37,12 @@ public class Bank {
 		Account account = retrieveAccount(uniqueId);
 		account.withdraw(money);
 	}
+
+	public boolean accountExistsByUniqueID(int quickId) {
+		if (accounts.get(quickId) != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
