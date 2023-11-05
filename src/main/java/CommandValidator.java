@@ -8,10 +8,23 @@ public class CommandValidator {
 
 	public boolean validate(String command) {
 
-		if (bank.accountExistsByUniqueID(12345678)) {
-			return false;
+		String[] parts = command.split(" ");
+
+		if ("create".equals(parts[0])) {
+			if (bank.accountExistsByUniqueID(Integer.parseInt(parts[2]))) {
+				return false;
+			} else {
+				return true;
+			}
+		} else if ("deposit".equals(parts[0])) {
+			if (bank.accountExistsByUniqueID(Integer.parseInt(parts[1]))) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
-			return true;
+			return false;
 		}
 	}
+
 }
