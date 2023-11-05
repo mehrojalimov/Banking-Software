@@ -57,4 +57,16 @@ public class CommandValidatorTest {
 		boolean actual = commandValidator.validate("create CD 22222222 2.2");
 		assertFalse(actual);
 	}
+
+	@Test
+	void creating_savings_account_is_valid() {
+		boolean actual = commandValidator.validate("create Saving 44444444 1.1");
+		assertTrue(actual);
+	}
+
+	@Test
+	void creating_Checking_or_Saving_with_specific_amount_is_invalid() {
+		boolean actual = commandValidator.validate("create Checking 55555555 1.1 6000");
+		assertFalse(actual);
+	}
 }
