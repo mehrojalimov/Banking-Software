@@ -34,4 +34,9 @@ public class CommandValidatorTest {
 		assertTrue(actual);
 	}
 
+	@Test
+	void creating_account_without_apr_is_invalid() {
+		boolean actual = commandValidator.validate("create Checking 12345677");
+		assertFalse(actual);
+	}
 }

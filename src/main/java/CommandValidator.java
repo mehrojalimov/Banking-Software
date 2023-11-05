@@ -7,24 +7,18 @@ public class CommandValidator {
 	}
 
 	public boolean validate(String command) {
-
 		String[] parts = command.split(" ");
 
 		if ("create".equals(parts[0])) {
-			if (bank.accountExistsByUniqueID(Integer.parseInt(parts[2]))) {
-				return false;
-			} else {
+			if (parts.length >= 4 && !bank.accountExistsByUniqueID(Integer.parseInt(parts[2]))) {
 				return true;
 			}
 		} else if ("deposit".equals(parts[0])) {
-			if (bank.accountExistsByUniqueID(Integer.parseInt(parts[1]))) {
+			if (parts.length == 3 && bank.accountExistsByUniqueID(Integer.parseInt(parts[1]))) {
 				return true;
-			} else {
-				return false;
 			}
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 }
