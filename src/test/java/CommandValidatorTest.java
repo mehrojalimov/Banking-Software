@@ -26,4 +26,12 @@ public class CommandValidatorTest {
 		boolean actual = commandValidator.validate("create Checking 12345678 2.2");
 		assertFalse(actual);
 	}
+
+	@Test
+	void deposit_money_to_an_account_is_valid() {
+		bank.addSavingAccount(11111111, 1.1);
+		boolean actual = commandValidator.validate("deposit 11111111 1000");
+		assertTrue(actual);
+	}
+
 }
