@@ -39,4 +39,10 @@ public class CommandValidatorTest {
 		boolean actual = commandValidator.validate("create Checking 12345677");
 		assertFalse(actual);
 	}
+
+	@Test
+	void deposit_to_nonexistent_account_is_invalid() {
+		boolean actual = commandValidator.validate("deposit 99999999 500");
+		assertFalse(actual);
+	}
 }
