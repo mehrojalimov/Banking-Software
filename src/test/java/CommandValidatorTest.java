@@ -45,4 +45,16 @@ public class CommandValidatorTest {
 		boolean actual = commandValidator.validate("deposit 99999999 500");
 		assertFalse(actual);
 	}
+
+	@Test
+	void valid_cd_account_creation() {
+		boolean actual = commandValidator.validate("create CD 87654321 1.8 5000");
+		assertTrue(actual);
+	}
+
+	@Test
+	void creating_cd_without_specified_amount_is_invalid() {
+		boolean actual = commandValidator.validate("create CD 22222222 2.2");
+		assertFalse(actual);
+	}
 }

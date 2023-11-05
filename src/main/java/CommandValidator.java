@@ -11,7 +11,11 @@ public class CommandValidator {
 
 		if ("create".equals(parts[0])) {
 			if (parts.length >= 4 && !bank.accountExistsByUniqueID(Integer.parseInt(parts[2]))) {
-				return true;
+				if ("Saving".equals(parts[1]) || "Checking".equals(parts[1])) {
+					return true;
+				} else if ("CD".equals(parts[1]) && parts.length == 5) {
+					return true;
+				}
 			}
 		} else if ("deposit".equals(parts[0])) {
 			if (parts.length == 3 && bank.accountExistsByUniqueID(Integer.parseInt(parts[1]))) {
