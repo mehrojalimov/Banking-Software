@@ -10,8 +10,8 @@ public class CommandValidator {
 		String[] parts = command.split(" ");
 
 		if ("create".equals(parts[0])) {
-			if (parts.length >= 4 && !bank.accountExistsByUniqueID(Integer.parseInt(parts[2]))) {
-				if ("Saving".equals(parts[1]) || "Checking".equals(parts[1])) {
+			if (!bank.accountExistsByUniqueID(Integer.parseInt(parts[2]))) {
+				if ("Saving".equals(parts[1]) || "Checking".equals(parts[1]) && parts.length == 4) {
 					return true;
 				} else if ("CD".equals(parts[1]) && parts.length == 5) {
 					return true;
