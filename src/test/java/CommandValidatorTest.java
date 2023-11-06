@@ -101,6 +101,11 @@ public class CommandValidatorTest {
 	}
 
 	@Test
+	void creating_CD_with_less_than_min_requirement_is_invalid() {
+		boolean actual = commandValidator.validate("create CD 88888888 5.5 100");
+	}
+
+	@Test
 	void creating_command_is_test_case_insensitive() {
 		boolean actual = commandValidator.validate("CreAte Saving 77777777 1.1");
 		assertTrue(actual);
@@ -141,4 +146,5 @@ public class CommandValidatorTest {
 		boolean actual = commandValidator.validate("Create 12345678 Saving 1.5");
 		assertFalse(actual);
 	}
+
 }
