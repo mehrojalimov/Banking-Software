@@ -103,6 +103,7 @@ public class CommandValidatorTest {
 	@Test
 	void creating_CD_with_less_than_min_requirement_is_invalid() {
 		boolean actual = commandValidator.validate("create CD 88888888 5.5 100");
+		assertFalse(actual);
 	}
 
 	@Test
