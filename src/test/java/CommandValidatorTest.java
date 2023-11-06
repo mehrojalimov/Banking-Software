@@ -119,7 +119,7 @@ public class CommandValidatorTest {
 	}
 
 	@Test
-	void creating_account_with_unique_id_bot_eight_digits_is_invalid() {
+	void creating_account_with_unique_id_not_eight_digits_is_invalid() {
 		boolean actual = commandValidator.validate("create Checking 123456 1.5");
 		assertFalse(actual);
 	}
@@ -127,6 +127,18 @@ public class CommandValidatorTest {
 	@Test
 	void creating_account_without_unique_id_and_apr_is_invalid() {
 		boolean actual = commandValidator.validate("Create Saving");
+		assertFalse(actual);
+	}
+
+	@Test
+	void creating_account_without_account_type_is_invalid() {
+		boolean actual = commandValidator.validate("Create 1111111 1.9");
+		assertFalse(actual);
+	}
+
+	@Test
+	void creating_account_with_wrong_set_of_commands_is_invalid() {
+		boolean actual = commandValidator.validate("Create 12345678 Saving 1.5");
 		assertFalse(actual);
 	}
 }
