@@ -93,4 +93,10 @@ public class CommandValidatorTest {
 		boolean actual = commandValidator.validate("create Saving 12345678 -2.2");
 		assertFalse(actual);
 	}
+
+	@Test
+	void creating_CD_with_over_the_limit_amount_is_invalid() {
+		boolean actual = commandValidator.validate("create CD 44444444 1.1 11000");
+		assertFalse(actual);
+	}
 }
