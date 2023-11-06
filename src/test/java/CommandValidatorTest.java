@@ -99,4 +99,10 @@ public class CommandValidatorTest {
 		boolean actual = commandValidator.validate("create CD 44444444 1.1 11000");
 		assertFalse(actual);
 	}
+
+	@Test
+	void creating_command_is_test_case_insensitive() {
+		boolean actual = commandValidator.validate("CreAte Saving 77777777 1.1");
+		assertTrue(actual);
+	}
 }

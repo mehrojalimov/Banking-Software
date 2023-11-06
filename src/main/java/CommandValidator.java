@@ -8,8 +8,9 @@ public class CommandValidator {
 
 	public boolean validate(String command) {
 		String[] parts = command.split(" ");
+		String accountCommand = parts[0].toLowerCase();
 
-		if ("create".equals(parts[0])) {
+		if ("create".equals(accountCommand)) {
 			if (parts.length >= 4 && !bank.accountExistsByUniqueID(Integer.parseInt(parts[2]))
 					&& hasValidUniquesIdAndApr(parts[2], parts[3])) {
 				if ("Saving".equals(parts[1]) || "Checking".equals(parts[1]) && parts.length == 4) {
@@ -19,7 +20,7 @@ public class CommandValidator {
 				}
 			}
 
-		} else if ("deposit".equals(parts[0])) {
+		} else if ("deposit".equals(accountCommand)) {
 			if (parts.length == 3 && bank.accountExistsByUniqueID(Integer.parseInt(parts[1]))) {
 
 				return true;
