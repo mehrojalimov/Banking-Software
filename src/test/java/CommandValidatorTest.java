@@ -69,4 +69,16 @@ public class CommandValidatorTest {
 		boolean actual = commandValidator.validate("create Checking 55555555 1.1 6000");
 		assertFalse(actual);
 	}
+
+	@Test
+	void creating_account_with_unique_id_of_eight_digit_numbers_is_valid() {
+		boolean actual = commandValidator.validate("create Saving 12345678 1.1");
+		assertTrue(actual);
+	}
+
+	@Test
+	void creating_account_with_apr_out_of_range_of_zero_to_ten_is_invalid() {
+		boolean actual = commandValidator.validate("create Checking 11111111 10.5");
+
+	}
 }
