@@ -111,4 +111,10 @@ public class CommandValidatorTest {
 		boolean actual = commandValidator.validate("Create CD 88888888 9");
 		assertFalse(actual);
 	}
+
+	@Test
+	void typo_in_command_is_invalid() {
+		boolean actual = commandValidator.validate("creat Saving 11111111 1");
+		assertFalse(actual);
+	}
 }
