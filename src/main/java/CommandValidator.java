@@ -14,7 +14,7 @@ public class CommandValidator {
 					&& hasValidUniquesIdAndApr(parts[2], parts[3])) {
 				if ("Saving".equals(parts[1]) || "Checking".equals(parts[1]) && parts.length == 4) {
 					return true;
-				} else if ("CD".equals(parts[1]) && parts.length == 5) {
+				} else if ("CD".equals(parts[1]) && parts.length == 5 && isInAmountRange(parts[4])) {
 					return true;
 				}
 			}
@@ -35,6 +35,14 @@ public class CommandValidator {
 		boolean validApr = aprValue >= 0 && aprValue <= 10;
 
 		return validUniqueId && validApr;
+	}
+
+	private boolean isInAmountRange(String amount) {
+		double CDAmount = Double.parseDouble(amount);
+
+		boolean correctRange = CDAmount >= 1000 && CDAmount <= 10000;
+
+		return correctRange;
 	}
 
 }
