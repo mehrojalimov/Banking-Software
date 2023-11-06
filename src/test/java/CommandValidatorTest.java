@@ -105,4 +105,10 @@ public class CommandValidatorTest {
 		boolean actual = commandValidator.validate("CreAte Saving 77777777 1.1");
 		assertTrue(actual);
 	}
+
+	@Test
+	void creating_CD_with_missing_amount_is_invalid() {
+		boolean actual = commandValidator.validate("Create CD 88888888 9");
+		assertFalse(actual);
+	}
 }
