@@ -32,7 +32,7 @@ public class CommandValidator {
 		boolean validUniqueId = uniqueId.matches("^\\d{8}$");
 
 		double aprValue = Double.parseDouble(apr);
-		boolean validApr = aprValue >= 1 && aprValue <= 10;
+		boolean validApr = aprValue >= 0 && aprValue <= 10;
 
 		return validUniqueId && validApr;
 	}
