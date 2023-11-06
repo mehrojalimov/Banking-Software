@@ -81,4 +81,16 @@ public class CommandValidatorTest {
 		boolean actual = commandValidator.validate("create Checking 11111111 10.5");
 		assertFalse(actual);
 	}
+
+	@Test
+	void creating_account_with_negative_unique_id_is_invalid() {
+		boolean actual = commandValidator.validate("create CD -55555555 1.5 1000");
+		assertFalse(actual);
+	}
+
+	@Test
+	void creating_account_with_negative_apr_is_invalid() {
+		boolean actual = commandValidator.validate("create Saving 12345678 -2.2");
+		assertFalse(actual);
+	}
 }
