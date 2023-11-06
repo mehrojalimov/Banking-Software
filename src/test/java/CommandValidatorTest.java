@@ -79,6 +79,6 @@ public class CommandValidatorTest {
 	@Test
 	void creating_account_with_apr_out_of_range_of_zero_to_ten_is_invalid() {
 		boolean actual = commandValidator.validate("create Checking 11111111 10.5");
-
+		assertFalse(actual);
 	}
 }
