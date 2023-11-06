@@ -153,4 +153,11 @@ public class CommandValidatorTest {
 		boolean actual = commandValidator.validate("create Savin 99999999 2.2");
 		assertFalse(actual);
 	}
+
+	@Test
+	void creating_account_with_nonnumeric_apr_is_invalid() {
+		boolean actual = commandValidator.validate("create CD 7777777 one 10000");
+		assertFalse(actual);
+
+	}
 }
