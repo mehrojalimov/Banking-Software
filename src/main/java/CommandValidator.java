@@ -10,7 +10,7 @@ public class CommandValidator {
 		String[] parts = command.split(" ");
 
 		if ("create".equals(parts[0])) {
-			if (!bank.accountExistsByUniqueID(Integer.parseInt(parts[2]))
+			if (parts.length >= 4 && !bank.accountExistsByUniqueID(Integer.parseInt(parts[2]))
 					&& hasValidUniquesIdAndApr(parts[2], parts[3])) {
 				if ("Saving".equals(parts[1]) || "Checking".equals(parts[1]) && parts.length == 4) {
 					return true;
@@ -18,8 +18,10 @@ public class CommandValidator {
 					return true;
 				}
 			}
+
 		} else if ("deposit".equals(parts[0])) {
 			if (parts.length == 3 && bank.accountExistsByUniqueID(Integer.parseInt(parts[1]))) {
+
 				return true;
 			}
 		}
