@@ -117,4 +117,16 @@ public class CommandValidatorTest {
 		boolean actual = commandValidator.validate("creat Saving 11111111 1");
 		assertFalse(actual);
 	}
+
+	@Test
+	void creating_account_with_unique_id_bot_eight_digits_is_invalid() {
+		boolean actual = commandValidator.validate("create Checking 123456 1.5");
+		assertFalse(actual);
+	}
+
+	@Test
+	void creating_account_without_unique_id_and_apr_is_invalid() {
+		boolean actual = commandValidator.validate("Create Saving");
+		assertFalse(actual);
+	}
 }
