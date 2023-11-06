@@ -148,4 +148,9 @@ public class CommandValidatorTest {
 		assertFalse(actual);
 	}
 
+	@Test
+	void creating_account_with_typo_in_account_name_is_invalid() {
+		boolean actual = commandValidator.validate("create Savin 99999999 2.2");
+		assertFalse(actual);
+	}
 }
