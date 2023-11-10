@@ -10,7 +10,7 @@ public class CDTest {
 
 	@Test
 	void get_the_balance_of_cd() {
-		CD cd = new CD(UNIQUE_ID, APR, BALANCE);
+		CD cd = new CD("CD", UNIQUE_ID, APR, BALANCE);
 
 		double actual = cd.getBalance();
 

@@ -1,7 +1,6 @@
 public class CD extends Account {
 
-	public CD(int uniqueId, double apr, double balance) {
-		super(uniqueId, apr, balance);
+	public CD(String accountType, int uniqueId, double apr, double balance) {
+		super(accountType, uniqueId, apr, balance);
 	}
-
 }

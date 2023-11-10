@@ -1,18 +1,21 @@
 public abstract class Account {
 
+	private final double APR;
+	private final int UNIQUE_ID;
+	private final String ACCOUNT_TYPE;
 	private double balance;
-	private double APR;
-	private int UNIQUE_ID;
 
-	public Account(int UNIQUE_ID, double APR) {
+	public Account(String ACCOUNT_TYPE, int UNIQUE_ID, double APR) {
 		this.APR = APR;
 		this.UNIQUE_ID = UNIQUE_ID;
+		this.ACCOUNT_TYPE = ACCOUNT_TYPE;
 	}
 
-	public Account(int UNIQUE_ID, double APR, double balance) {
+	public Account(String ACCOUNT_TYPE, int UNIQUE_ID, double APR, double balance) {
 		this.APR = APR;
 		this.balance = balance;
 		this.UNIQUE_ID = UNIQUE_ID;
+		this.ACCOUNT_TYPE = ACCOUNT_TYPE;
 	}
 
 	public double getBalance() {
@@ -46,6 +49,10 @@ public abstract class Account {
 		} else {
 			System.out.println("Cannot withdraw negative amount!");
 		}
+	}
+
+	public String getAccountType() {
+		return ACCOUNT_TYPE;
 	}
 
 }

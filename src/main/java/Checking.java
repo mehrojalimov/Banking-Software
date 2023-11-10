@@ -1,6 +1,7 @@
 public class Checking extends Account {
 
-	public Checking(int uniqueId, double apr) {
-		super(uniqueId, apr);
+	public Checking(String accountType, int uniqueId, double apr) {
+		super(accountType, uniqueId, apr);
 	}
+
 }
