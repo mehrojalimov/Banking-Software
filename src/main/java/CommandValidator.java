@@ -21,7 +21,8 @@ public class CommandValidator {
 			}
 
 		} else if ("deposit".equals(accountCommand)) {
-			if (parts.length == 3 && bank.accountExistsByUniqueID(Integer.parseInt(parts[1]))) {
+			if (parts.length == 3 && bank.accountExistsByUniqueID(Integer.parseInt(parts[1]))
+					&& isInDepositLimit(parts[1], parts[2])) {
 
 				return true;
 			}
@@ -59,7 +60,7 @@ public class CommandValidator {
 		}
 	}
 
-	private boolean depositLimit(String uniqueId, String depositAmountStr) {
+	private boolean isInDepositLimit(String uniqueId, String depositAmountStr) {
 		try {
 			int accountId = Integer.parseInt(uniqueId);
 			Account account = bank.retrieveAccount(accountId);
@@ -71,7 +72,7 @@ public class CommandValidator {
 
 				double depositLimit = getDepositLimitForAccountType(accountType);
 
-				if (depositAmount <= depositLimit) {
+				if (depositAmount <= depositLimit && depositAmount >= 0) {
 					return true; // Deposit amount is within the limit
 				}
 			}
@@ -79,22 +80,17 @@ public class CommandValidator {
 			return false;
 		}
 
-		return false; // Deposit amount exceeds the limit or an error occurred
+		return false;
 	}
 
 	private double getDepositLimitForAccountType(String accountType) {
-		// Implement logic to retrieve deposit limits for different account types
-		// Return 0 if there's no limit or if the account type is not recognized.
-		// For example:
 		switch (accountType) {
 		case "saving":
-			return 5000; // Set the deposit limit for Saving accounts
+			return 2500;
 		case "checking":
-			return 3000; // Set the deposit limit for Checking accounts
-		case "cd":
-			return 10000; // Set the deposit limit for CD accounts
+			return 1000;
 		default:
-			return 0; // No limit or unrecognized account type
+			return -1;
 		}
 	}
 
