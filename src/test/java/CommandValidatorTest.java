@@ -171,6 +171,20 @@ public class CommandValidatorTest {
 	void deposit_saving_over_the_amount_limit_is_invalid() {
 		bank.addSavingAccount(12345678, 2.5);
 		boolean actual = commandValidator.validate("deposit 12345678 6000");
+		assertFalse(actual);
+	}
+
+	@Test
+	void depositing_checking_over_the_limit_is_invalid() {
+		bank.addCheckingAccount(11111111, 2.2);
+		boolean actual = commandValidator.validate("deposit 11111111 1001");
+		assertFalse(actual);
+	}
+
+	@Test
+	void depositing_command_is_case_insensitive() {
+		bank.addCheckingAccount(77777777, 2.4);
+		boolean actual = commandValidator.validate("DePosIt 77777777 900");
 		assertTrue(actual);
 	}
 }
