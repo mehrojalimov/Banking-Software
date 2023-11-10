@@ -158,6 +158,19 @@ public class CommandValidatorTest {
 	void creating_account_with_nonnumeric_apr_is_invalid() {
 		boolean actual = commandValidator.validate("create CD 7777777 one 10000");
 		assertFalse(actual);
+	}
 
+	@Test
+	void depositing_with_mixed_command_is_invalid() {
+		bank.addCDAccount(12345678, 2.2, 5000);
+		boolean actual = commandValidator.validate("12345678 deposit 5000");
+		assertFalse(actual);
+	}
+
+	@Test
+	void deposit_saving_over_the_amount_limit_is_invalid() {
+		bank.addSavingAccount(12345678, 2.5);
+		boolean actual = commandValidator.validate("deposit 12345678 6000");
+		assertTrue(actual);
 	}
 }

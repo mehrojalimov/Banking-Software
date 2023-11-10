@@ -6,6 +6,7 @@ public class Bank {
 
 	Bank() {
 		accounts = new HashMap<>();
+
 	}
 
 	public static Map<Integer, Account> getAccounts() {
@@ -13,16 +14,16 @@ public class Bank {
 	}
 
 	public void addCheckingAccount(int uniqueID, double apr) {
-		accounts.put(uniqueID, new Checking(uniqueID, apr));
+		accounts.put(uniqueID, new Checking("Checking", uniqueID, apr));
 
 	}
 
 	public void addSavingAccount(int uniqueID, double apr) {
-		accounts.put(uniqueID, new Saving(uniqueID, apr));
+		accounts.put(uniqueID, new Saving("Saving", uniqueID, apr));
 	}
 
-	public void addCDAccount(int uniqueID, double apt, double initialBalance) {
-		accounts.put(uniqueID, new CD(uniqueID, apt, initialBalance));
+	public void addCDAccount(int uniqueID, double apr, double initialBalance) {
+		accounts.put(uniqueID, new CD("CD", uniqueID, apr, initialBalance));
 	}
 
 	public Account retrieveAccount(int uniqueId) {
@@ -39,10 +40,6 @@ public class Bank {
 	}
 
 	public boolean accountExistsByUniqueID(int quickId) {
-		if (accounts.get(quickId) != null) {
-			return true;
-		} else {
-			return false;
-		}
+		return accounts.get(quickId) != null;
 	}
 }
