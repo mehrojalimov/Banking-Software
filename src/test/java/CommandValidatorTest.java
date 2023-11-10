@@ -187,4 +187,18 @@ public class CommandValidatorTest {
 		boolean actual = commandValidator.validate("DePosIt 77777777 900");
 		assertTrue(actual);
 	}
+
+	@Test
+	void depositing_money_to_CD_accounts_is_invalid() {
+		bank.addCDAccount(11111111, 1.1, 5000);
+		boolean actual = commandValidator.validate("deposit 11111111 2000");
+		assertFalse(actual);
+	}
+
+	@Test
+	void depositing_money_to_wrong_accountId_is_invalid() {
+		bank.addCheckingAccount(55555555, 2.0);
+		boolean actual = commandValidator.validate("deposit 55555556 200");
+		assertFalse(actual);
+	}
 }
