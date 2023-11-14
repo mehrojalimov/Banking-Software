@@ -44,4 +44,36 @@ public class CommandProcessorTest {
 		assertEquals("saving", bank.retrieveAccount(99999999).getAccountType());
 	}
 
+	@Test
+	void bank_can_store_multiple_accounts() {
+		commandProcessor.process("create Saving 88888888 5.5");
+		commandProcessor.process("create CD 77777777 3.3 5000");
+
+		assertNotNull(bank.retrieveAccount(88888888));
+		assertNotNull(bank.retrieveAccount(77777777));
+
+		assertEquals("saving", bank.retrieveAccount(88888888).getAccountType());
+		assertEquals(5.5, bank.retrieveAccount(88888888).getAPR());
+
+		assertEquals("cd", bank.retrieveAccount(77777777).getAccountType());
+		assertEquals(3.3, bank.retrieveAccount(77777777).getAPR());
+		assertEquals(5000, bank.retrieveAccount(77777777).getBalance());
+	}
+
+	@Test
+	void depositing_to_a_new_account() {
+		commandProcessor.process("create Saving 55555555 1.1");
+		commandProcessor.process("deposit 55555555 2000");
+
+		assertEquals(2000, bank.retrieveAccount(55555555).getBalance());
+	}
+
+	@Test
+	void depositing_to_an_existing_account_two_time() {
+		commandProcessor.process("create Checking 22222222 2.3");
+		commandProcessor.process("deposit 22222222 1000");
+		commandProcessor.process("deposit 22222222 500");
+
+		assertEquals(1500, bank.retrieveAccount(22222222).getBalance());
+	}
 }

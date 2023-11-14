@@ -10,8 +10,13 @@ public class CommandProcessor {
 		String[] parts = command.split(" ");
 		String commandType = parts[0].toLowerCase();
 
-		if (commandType.equals("create")) {
+		switch (commandType) {
+		case "create":
 			processCreateCommand(parts);
+			break;
+		case "deposit":
+			processDepositCommand(parts);
+			break;
 		}
 	}
 
@@ -32,5 +37,12 @@ public class CommandProcessor {
 			bank.addSavingAccount(uniqueId, apr);
 			break;
 		}
+	}
+
+	private void processDepositCommand(String[] parts) {
+		int uniqueId = Integer.parseInt(parts[1]);
+		double amount = Double.parseDouble(parts[2]);
+
+		bank.deposit(uniqueId, amount);
 	}
 }
