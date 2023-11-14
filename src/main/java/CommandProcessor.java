@@ -20,8 +20,17 @@ public class CommandProcessor {
 		int uniqueId = Integer.parseInt(parts[2]);
 		double apr = Double.parseDouble(parts[3]);
 
-		if (accountType.equals("checking")) {
+		switch (accountType) {
+		case "checking":
 			bank.addCheckingAccount(uniqueId, apr);
+			break;
+		case "cd":
+			double amount = Double.parseDouble(parts[4]);
+			bank.addCDAccount(uniqueId, apr, amount);
+			break;
+		case "saving":
+			bank.addSavingAccount(uniqueId, apr);
+			break;
 		}
 	}
 }
