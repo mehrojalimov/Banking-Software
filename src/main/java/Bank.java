@@ -14,16 +14,16 @@ public class Bank {
 	}
 
 	public void addCheckingAccount(int uniqueID, double apr) {
-		accounts.put(uniqueID, new Checking("Checking", uniqueID, apr));
+		accounts.put(uniqueID, new Checking("checking", uniqueID, apr));
 
 	}
 
 	public void addSavingAccount(int uniqueID, double apr) {
-		accounts.put(uniqueID, new Saving("Saving", uniqueID, apr));
+		accounts.put(uniqueID, new Saving("saving", uniqueID, apr));
 	}
 
 	public void addCDAccount(int uniqueID, double apr, double initialBalance) {
-		accounts.put(uniqueID, new CD("CD", uniqueID, apr, initialBalance));
+		accounts.put(uniqueID, new CD("cd", uniqueID, apr, initialBalance));
 	}
 
 	public Account retrieveAccount(int uniqueId) {
