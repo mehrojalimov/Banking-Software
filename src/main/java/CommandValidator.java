@@ -1,6 +1,6 @@
 public class CommandValidator {
 
-	private Bank bank;
+	private final Bank bank;
 
 	public CommandValidator(Bank bank) {
 		this.bank = bank;
@@ -9,23 +9,12 @@ public class CommandValidator {
 	public boolean validate(String command) {
 		String[] parts = command.split(" ");
 		String accountCommand = parts[0].toLowerCase();
-		String accountType = parts[1].toLowerCase();
 
 		if ("create".equals(accountCommand)) {
-			if (parts.length >= 4 && !doesAccountExist(parts[2]) && hasValidUniquesIdAndApr(parts[2], parts[3])) {
-				if ("saving".equals(accountType) || "checking".equals(accountType) && parts.length == 4) {
-					return true;
-				} else if ("cd".equals(accountType) && parts.length == 5 && isInAmountRange(parts[4])) {
-					return true;
-				}
-			}
+			return isCreateCommandValid(parts);
 
 		} else if ("deposit".equals(accountCommand)) {
-			if (parts.length == 3 && bank.accountExistsByUniqueID(Integer.parseInt(parts[1]))
-					&& isInDepositLimit(parts[1], parts[2])) {
-
-				return true;
-			}
+			return isDepositCommandValid(parts);
 		}
 		return false;
 	}
@@ -46,9 +35,7 @@ public class CommandValidator {
 	private boolean isInAmountRange(String amount) {
 		double CDAmount = Double.parseDouble(amount);
 
-		boolean correctRange = CDAmount >= 1000 && CDAmount <= 10000;
-
-		return correctRange;
+		return CDAmount >= 1000 && CDAmount <= 10000;
 	}
 
 	private boolean doesAccountExist(String uniqueId) {
@@ -67,7 +54,6 @@ public class CommandValidator {
 
 			if (account != null) {
 				String accountType = account.getAccountType().toLowerCase();
-				System.out.println(accountType);
 				double depositAmount = Double.parseDouble(depositAmountStr); // Initialize depositAmount
 
 				double depositLimit = getDepositLimitForAccountType(accountType);
@@ -92,6 +78,29 @@ public class CommandValidator {
 		default:
 			return -1;
 		}
+	}
+
+	boolean isCreateCommandValid(String[] parts) {
+
+		return parts.length >= 4 && !doesAccountExist(parts[2]) && hasValidFormat(parts);
+	}
+
+	private boolean hasValidFormat(String[] parts) {
+		String accountType = parts[1].toLowerCase();
+		if (hasValidUniquesIdAndApr(parts[2], parts[3])) {
+			if ("saving".equals(accountType) || "checking".equals(accountType) && parts.length == 4) {
+				return true;
+			} else {
+				return "cd".equals(accountType) && parts.length == 5 && isInAmountRange(parts[4]);
+			}
+		}
+
+		return false;
+	}
+
+	private boolean isDepositCommandValid(String[] parts) {
+		return parts.length == 3 && bank.accountExistsByUniqueID(Integer.parseInt(parts[1]))
+				&& isInDepositLimit(parts[1], parts[2]);
 	}
 
 }
