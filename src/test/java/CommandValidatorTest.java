@@ -202,10 +202,10 @@ public class CommandValidatorTest {
 		assertFalse(actual);
 	}
 
-	/*
-	 * @Test void creating_an_existing_account_is_invalid() {
-	 * bank.addCheckingAccount(12345678, 1.1); boolean actual =
-	 * commandValidator.validate("create checking 12345678 1.1");
-	 * assertFalse(actual); }
-	 */
+	@Test
+	void creating_an_existing_account_is_invalid() {
+		bank.addCheckingAccount(12345678, 1.1);
+		boolean actual = commandValidator.validate("create checking 12345678 1.1");
+		assertFalse(actual);
+	}
 }
