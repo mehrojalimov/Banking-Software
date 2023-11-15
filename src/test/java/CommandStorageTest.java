@@ -15,21 +15,21 @@ public class CommandStorageTest {
 
 	@Test
 	void storing_invalid_commands() {
-		commandStorage.addCommand("Create 1111111 11.5");
-		assertEquals(1, commandStorage.getAllCommands().size());
-		assertEquals("Create 1111111 11.5", commandStorage.getAllCommands().get(0));
+		commandStorage.addInvalidCommand("Create 1111111 11.5");
+		assertEquals(1, commandStorage.getInvalidCommands().size());
+		assertEquals("Create 1111111 11.5", commandStorage.getInvalidCommands().get(0));
 	}
 
 	@Test
 	void stores_multiple_invalid_commands() {
-		commandStorage.addCommand("Checking 11111111 3.3");
-		commandStorage.addCommand("Deposit 1111111");
-		commandStorage.addCommand("Create CD 12345678 3.3");
+		commandStorage.addInvalidCommand("Checking 11111111 3.3");
+		commandStorage.addInvalidCommand("Deposit 1111111");
+		commandStorage.addInvalidCommand("Create CD 12345678 3.3");
 
-		assertEquals(3, commandStorage.getAllCommands().size());
-		assertTrue(commandStorage.getAllCommands().contains("Checking 11111111 3.3"));
-		assertTrue(commandStorage.getAllCommands().contains("Deposit 1111111"));
-		assertTrue(commandStorage.getAllCommands().contains("Create CD 12345678 3.3"));
+		assertEquals(3, commandStorage.getInvalidCommands().size());
+		assertTrue(commandStorage.getInvalidCommands().contains("Checking 11111111 3.3"));
+		assertTrue(commandStorage.getInvalidCommands().contains("Deposit 1111111"));
+		assertTrue(commandStorage.getInvalidCommands().contains("Create CD 12345678 3.3"));
 
 	}
 }
