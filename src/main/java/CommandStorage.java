@@ -9,11 +9,11 @@ public class CommandStorage {
 		this.storedCommands = new ArrayList<>();
 	}
 
-	public void addCommand(String command) {
+	public void addInvalidCommand(String command) {
 		storedCommands.add(command);
 	}
 
-	public List<String> getAllCommands() {
+	public List<String> getInvalidCommands() {
 		return new ArrayList<>(storedCommands);
 	}
 }
