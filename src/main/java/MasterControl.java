@@ -1,9 +1,9 @@
 import java.util.List;
 
 public class MasterControl {
-	private CommandValidator commandValidator;
-	private CommandProcessor commandProcessor;
-	private CommandStorage commandStorage;
+	private final CommandValidator commandValidator;
+	private final CommandProcessor commandProcessor;
+	private final CommandStorage commandStorage;
 
 	public MasterControl(CommandValidator commandValidator, CommandProcessor commandProcessor,
 			CommandStorage commandStorage) {
@@ -13,6 +13,7 @@ public class MasterControl {
 	}
 
 	public List<String> start(List<String> input) {
+		System.out.println(input);
 		for (String command : input) {
 			if (commandValidator.validate(command)) {
 				commandProcessor.process(command);
