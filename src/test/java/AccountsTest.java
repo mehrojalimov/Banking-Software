@@ -11,8 +11,8 @@ public class AccountsTest {
 
 	@BeforeEach
 	void setUp() {
-		checking = new Checking(UNIQUE_ID, APR);
-		saving = new Saving(UNIQUE_ID, APR);
+		checking = new Checking("Checking", UNIQUE_ID, APR);
+		saving = new Saving("Saving", UNIQUE_ID, APR);
 	}
 
 	@Test
